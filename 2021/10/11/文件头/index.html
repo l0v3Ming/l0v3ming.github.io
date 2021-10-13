@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>特殊 | nothing to say</title>
+  <title>文件头 | nothing to say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="字频统计大量无特征、无规律字符 脚本： 12345678910111213141516alphabet &#x3D; &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- &#x3D;\\&amp;#123;\\&amp;#125;[]&quot;#存在的字符strings &#x3D; open(&amp;#x27;flag.txt">
+  <meta name="description" content="1.gifgif的文件头是 47 49 46 38  直接编辑就行 2.Rar文件头：52 61 72 21 Rar！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="特殊">
-<meta property="og:url" content="http://example.com/2021/10/12/%E7%89%B9%E6%AE%8A/index.html">
+<meta property="og:title" content="文件头">
+<meta property="og:url" content="http://example.com/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/index.html">
 <meta property="og:site_name" content="nothing to say">
-<meta property="og:description" content="字频统计大量无特征、无规律字符 脚本： 12345678910111213141516alphabet &#x3D; &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- &#x3D;\\&amp;#123;\\&amp;#125;[]&quot;#存在的字符strings &#x3D; open(&amp;#x27;flag.txt">
+<meta property="og:description" content="1.gifgif的文件头是 47 49 46 38  直接编辑就行 2.Rar文件头：52 61 72 21 Rar！">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-12T07:35:16.000Z">
-<meta property="article:modified_time" content="2021-10-13T11:24:21.539Z">
+<meta property="article:published_time" content="2021-10-11T13:08:33.000Z">
+<meta property="article:modified_time" content="2021-10-13T10:49:45.119Z">
 <meta property="article:author" content="l0v3m1ng">
 <meta property="article:tag" content="misc">
 <meta name="twitter:card" content="summary">
@@ -74,10 +74,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-特殊" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-文件头" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/10/12/%E7%89%B9%E6%AE%8A/" class="article-date">
-  <time class="dt-published" datetime="2021-10-12T07:35:16.000Z" itemprop="datePublished">2021-10-12</time>
+    <a href="/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/" class="article-date">
+  <time class="dt-published" datetime="2021-10-11T13:08:33.000Z" itemprop="datePublished">2021-10-11</time>
 </a>
     
   </div>
@@ -88,7 +88,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      特殊
+      文件头
     </h1>
   
 
@@ -96,20 +96,14 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="字频统计"><a href="#字频统计" class="headerlink" title="字频统计"></a>字频统计</h1><p>大量无特征、无规律字符</p>
-<p>脚本：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">alphabet = <span class="string">&quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&amp;*()_+- =\\&#123;\\&#125;[]&quot;</span><span class="comment">#存在的字符</span></span><br><span class="line">strings = <span class="built_in">open</span>(<span class="string">&#x27;flag.txt&#x27;</span>).read() <span class="comment">#要打开的文件</span></span><br><span class="line"></span><br><span class="line">result = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> alphabet:</span><br><span class="line">	counts = strings.count(i)</span><br><span class="line">	i = <span class="string">&#x27;&#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(i)</span><br><span class="line">	result[i] = counts</span><br><span class="line"></span><br><span class="line">res = <span class="built_in">sorted</span>(result.items(),key=<span class="keyword">lambda</span> item:item[<span class="number">1</span>],reverse=<span class="literal">True</span>)</span><br><span class="line"><span class="keyword">for</span> data <span class="keyword">in</span> res:</span><br><span class="line">	<span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> res:</span><br><span class="line">	flag = <span class="built_in">str</span>(i[<span class="number">0</span>])</span><br><span class="line">	<span class="built_in">print</span>(flag[<span class="number">0</span>],end=<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="MP4"><a href="#MP4" class="headerlink" title="MP4"></a>MP4</h1><p>Kinovea这个工具</p>
-<p>可以逐帧分析</p>
-<p>一般是一闪而过找flag</p>
+        <h1 id="1-gif"><a href="#1-gif" class="headerlink" title="1.gif"></a>1.gif</h1><p>gif的文件头是 47 49 46 38 </p>
+<p>直接编辑就行</p>
+<h1 id="2-Rar"><a href="#2-Rar" class="headerlink" title="2.Rar"></a>2.Rar</h1><p>文件头：52 61 72 21 Rar！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/12/%E7%89%B9%E6%AE%8A/" data-id="ckupfeoio000520vb4d3rdg2b" data-title="特殊" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/" data-id="ckupfeoim000320vbcnxi7g3q" data-title="文件头" class="article-share-link">分享</a>
       
       
       
@@ -121,19 +115,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/10/12/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%8E%E6%96%87%E4%BB%B6io/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/11/%E7%BC%96%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          进制转换与文件io
+          编码
         
       </div>
     </a>
   
   
-    <a href="/2021/10/11/%E9%9A%90%E5%86%99/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/10/11/MFC%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">隐写</div>
+      <div class="article-nav-title">MFC消息发送</div>
     </a>
   
 </nav>
