@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>vm | nothing to say</title>
+  <title>加密算法 | nothing to say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="初识Vm_Instruction: vm才能识别的操作码 Vm_Context: vm用到的寄存器 Vm_Handlertable: 存放了指令，由操作码决定取出哪条指令 Vm_Dispatcher:读取操作码，决定用哪条handler vm用esi做EIP,用EDI做寄存器">
+  <meta name="description" content="rc4123456789101112131415161718192021222324252627#keyk&#x3D;&amp;#x27;填key&amp;#x27;klen&#x3D;len(k)s&#x3D;[]for i in range(256):    s.append(i)j&#x3D;0for i in range(256):    j&#x3D;(j+s[i]+ord(k[i%klen]))%256    s[i],s[j] &#x3D; s[j],s[i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="vm">
-<meta property="og:url" content="http://example.com/2021/10/13/vm/index.html">
+<meta property="og:title" content="加密算法">
+<meta property="og:url" content="http://example.com/2021/10/14/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="nothing to say">
-<meta property="og:description" content="初识Vm_Instruction: vm才能识别的操作码 Vm_Context: vm用到的寄存器 Vm_Handlertable: 存放了指令，由操作码决定取出哪条指令 Vm_Dispatcher:读取操作码，决定用哪条handler vm用esi做EIP,用EDI做寄存器">
+<meta property="og:description" content="rc4123456789101112131415161718192021222324252627#keyk&#x3D;&amp;#x27;填key&amp;#x27;klen&#x3D;len(k)s&#x3D;[]for i in range(256):    s.append(i)j&#x3D;0for i in range(256):    j&#x3D;(j+s[i]+ord(k[i%klen]))%256    s[i],s[j] &#x3D; s[j],s[i">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-10-13T01:53:21.000Z">
-<meta property="article:modified_time" content="2021-10-13T02:50:04.386Z">
+<meta property="article:published_time" content="2021-10-14T03:45:30.000Z">
+<meta property="article:modified_time" content="2021-10-14T03:46:44.720Z">
 <meta property="article:author" content="l0v3m1ng">
 <meta property="article:tag" content="RE">
 <meta name="twitter:card" content="summary">
@@ -74,10 +74,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-vm" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-加密算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/10/13/vm/" class="article-date">
-  <time class="dt-published" datetime="2021-10-13T01:53:21.000Z" itemprop="datePublished">2021-10-13</time>
+    <a href="/2021/10/14/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" class="article-date">
+  <time class="dt-published" datetime="2021-10-14T03:45:30.000Z" itemprop="datePublished">2021-10-14</time>
 </a>
     
   </div>
@@ -88,7 +88,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      vm
+      加密算法
     </h1>
   
 
@@ -96,16 +96,13 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="初识"><a href="#初识" class="headerlink" title="初识"></a>初识</h1><p>Vm_Instruction: vm才能识别的操作码</p>
-<p>Vm_Context: vm用到的寄存器</p>
-<p>Vm_Handlertable: 存放了指令，由操作码决定取出哪条指令</p>
-<p>Vm_Dispatcher:读取操作码，决定用哪条handler</p>
-<p>vm用esi做EIP,用EDI做寄存器</p>
+        <h1 id="rc4"><a href="#rc4" class="headerlink" title="rc4"></a>rc4</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#key</span></span><br><span class="line">k=<span class="string">&#x27;填key&#x27;</span></span><br><span class="line"></span><br><span class="line">klen=<span class="built_in">len</span>(k)</span><br><span class="line">s=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    s.append(i)</span><br><span class="line">j=<span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">256</span>):</span><br><span class="line">    j=(j+s[i]+<span class="built_in">ord</span>(k[i%klen]))%<span class="number">256</span></span><br><span class="line">    s[i],s[j] = s[j],s[i]</span><br><span class="line"><span class="comment">#input</span></span><br><span class="line">m=<span class="string">&#x27;填要加密或解密的&#x27;</span></span><br><span class="line">d=[<span class="number">0</span>]*<span class="number">256</span></span><br><span class="line">j=<span class="number">0</span></span><br><span class="line">i=<span class="number">0</span></span><br><span class="line">mlen=<span class="built_in">len</span>(m)</span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(mlen):</span><br><span class="line">    i=(i+<span class="number">1</span>)%<span class="number">256</span></span><br><span class="line">    j=(j+s[i])%<span class="number">256</span></span><br><span class="line">    s[i],s[j]=s[j],s[i]</span><br><span class="line">    t=(s[i]+s[j])%<span class="number">256</span></span><br><span class="line">    d[k]=s[t]^<span class="built_in">ord</span>(m[k])</span><br><span class="line">flag=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> d:</span><br><span class="line">    flag+=<span class="built_in">chr</span>(i)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/13/vm/" data-id="ckupfeoil000220vb8pkqfojd" data-title="vm" class="article-share-link">分享</a>
+      <a data-url="http://example.com/2021/10/14/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" data-id="ckuvbgjul00011svbc4521ibq" data-title="加密算法" class="article-share-link">分享</a>
       
       
       
@@ -117,19 +114,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2021/10/14/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/10/15/%E5%8E%8B%E7%BC%A9%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          加密算法
+          压缩包
         
       </div>
     </a>
   
   
-    <a href="/2021/10/12/%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E4%B8%8E%E6%96%87%E4%BB%B6io/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2021/10/13/vm/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">进制转换与文件io</div>
+      <div class="article-nav-title">vm</div>
     </a>
   
 </nav>
