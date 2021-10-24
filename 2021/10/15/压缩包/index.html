@@ -6,15 +6,15 @@
   
   <title>压缩包 | nothing to say</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="需要密码的三种可能：需要爆破、伪加密、密码相关信息藏在注释中 1.爆破一般是rar，zip有时也要爆破 2.伪加密zip伪加密，看全局标志位是不是00 00,是就是伪加密 3.注释要认真看 有时候空白的也可能暗藏玄机">
+  <meta name="description" content="需要密码的三种可能：需要爆破、伪加密、密码相关信息藏在注释中 1.爆破一般是rar，zip有时也要爆破 2.伪加密zip伪加密，看全局标志位是不是00 00,是就是伪加密 3.注释要认真看 有时候空白的也可能暗藏玄机 4.CRC碰撞CRC32:CRC本身是“冗余校验码”的意思，CRC32则表示会产生一个32bit（8位十六进制数）的校验值。 在产生CRC32时，源数据块的每一位都参与了运算，因此即">
 <meta property="og:type" content="article">
 <meta property="og:title" content="压缩包">
 <meta property="og:url" content="http://example.com/2021/10/15/%E5%8E%8B%E7%BC%A9%E5%8C%85/index.html">
 <meta property="og:site_name" content="nothing to say">
-<meta property="og:description" content="需要密码的三种可能：需要爆破、伪加密、密码相关信息藏在注释中 1.爆破一般是rar，zip有时也要爆破 2.伪加密zip伪加密，看全局标志位是不是00 00,是就是伪加密 3.注释要认真看 有时候空白的也可能暗藏玄机">
+<meta property="og:description" content="需要密码的三种可能：需要爆破、伪加密、密码相关信息藏在注释中 1.爆破一般是rar，zip有时也要爆破 2.伪加密zip伪加密，看全局标志位是不是00 00,是就是伪加密 3.注释要认真看 有时候空白的也可能暗藏玄机 4.CRC碰撞CRC32:CRC本身是“冗余校验码”的意思，CRC32则表示会产生一个32bit（8位十六进制数）的校验值。 在产生CRC32时，源数据块的每一位都参与了运算，因此即">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-15T13:14:41.000Z">
-<meta property="article:modified_time" content="2021-10-15T13:18:32.115Z">
+<meta property="article:modified_time" content="2021-10-22T08:45:11.643Z">
 <meta property="article:author" content="l0v3m1ng">
 <meta property="article:tag" content="misc">
 <meta name="twitter:card" content="summary">
@@ -101,6 +101,13 @@
 <h2 id="2-伪加密"><a href="#2-伪加密" class="headerlink" title="2.伪加密"></a>2.伪加密</h2><p>zip伪加密，看全局标志位是不是00 00,是就是伪加密</p>
 <h2 id="3-注释"><a href="#3-注释" class="headerlink" title="3.注释"></a>3.注释</h2><p>要认真看</p>
 <p>有时候空白的也可能暗藏玄机</p>
+<h1 id="4-CRC碰撞"><a href="#4-CRC碰撞" class="headerlink" title="4.CRC碰撞"></a>4.CRC碰撞</h1><p>CRC32:CRC本身是“冗余校验码”的意思，CRC32则表示会产生一个32bit（8位十六进制数）的校验值。</p>
+<p>在产生CRC32时，源数据块的每一位都参与了运算，因此即使数据块中只有一位发生改变也会得到不同的CRC32值，利用这个原理我们可以直接爆破出加密文件的内容。</p>
+<p>脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackCrc</span>(<span class="params">crc</span>):</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> dic:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> dic:</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="keyword">for</span> h <span class="keyword">in</span> dic:</span><br><span class="line">                    s = i + j + k + h</span><br><span class="line">                    <span class="keyword">if</span> crc == (binascii.crc32(s.encode())):</span><br><span class="line">                        f.write(s)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">CrackZip</span>():</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">68</span>):</span><br><span class="line">            file = <span class="string">&#x27;out&#x27;</span>+<span class="built_in">str</span>(i)+<span class="string">&#x27;.zip&#x27;</span></span><br><span class="line">            crc = zipfile.ZipFile(file,<span class="string">&#x27;r&#x27;</span>).getinfo(<span class="string">&#x27;data.txt&#x27;</span>).CRC</span><br><span class="line">            CrackCrc(crc)</span><br><span class="line"></span><br><span class="line">dic = string.ascii_letters + string.digits + <span class="string">&#x27;+/=&#x27;</span></span><br><span class="line"></span><br><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;out.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">CrackZip()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;CRC32碰撞完成&quot;</span>)</span><br><span class="line">f.close</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
