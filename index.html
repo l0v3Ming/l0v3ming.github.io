@@ -71,6 +71,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-das四月" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/04/24/das%E5%9B%9B%E6%9C%88/" class="article-date">
+  <time class="dt-published" datetime="2022-04-24T10:44:13.000Z" itemprop="datePublished">2022-04-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/04/24/das%E5%9B%9B%E6%9C%88/">das四月</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h1 id="Crackme"><a href="#Crackme" class="headerlink" title="Crackme"></a>Crackme</h1><h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p>打开程序，是MFC写的，用XSPY找到主窗口的响应函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> __thiscall <span class="title">sub_AA31E0</span><span class="params">(<span class="keyword">int</span> <span class="keyword">this</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">void</span> *v1; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">void</span> *v2; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="keyword">unsigned</span> <span class="keyword">int</span> Size; <span class="comment">// [esp+18h] [ebp-230h]</span></span><br><span class="line">  <span class="keyword">size_t</span> pdwDataLen; <span class="comment">// [esp+20h] [ebp-228h] BYREF</span></span><br><span class="line">  <span class="keyword">void</span> *Buf1; <span class="comment">// [esp+24h] [ebp-224h] BYREF</span></span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">void</span> *v8; <span class="comment">// [esp+28h] [ebp-220h] BYREF</span></span><br><span class="line">  BYTE *v9; <span class="comment">// [esp+2Ch] [ebp-21Ch] BYREF</span></span><br><span class="line">  <span class="keyword">size_t</span> dwDataLen; <span class="comment">// [esp+30h] [ebp-218h] BYREF</span></span><br><span class="line">  <span class="keyword">size_t</span> v11; <span class="comment">// [esp+34h] [ebp-214h] BYREF</span></span><br><span class="line">  DWORD v12; <span class="comment">// [esp+38h] [ebp-210h] BYREF</span></span><br><span class="line">  BYTE flag[<span class="number">260</span>]; <span class="comment">// [esp+3Ch] [ebp-20Ch] BYREF</span></span><br><span class="line">  BYTE key[<span class="number">260</span>]; <span class="comment">// [esp+140h] [ebp-108h] BYREF</span></span><br><span class="line"></span><br><span class="line">  CWnd::UpdateData((CWnd *)<span class="keyword">this</span>, <span class="number">1</span>);</span><br><span class="line">  <span class="built_in">memset</span>(key, <span class="number">0</span>, <span class="keyword">sizeof</span>(key));</span><br><span class="line">  <span class="built_in">memset</span>(flag, <span class="number">0</span>, <span class="keyword">sizeof</span>(flag));</span><br><span class="line">  Size = sub_AA3E70(<span class="keyword">this</span> + <span class="number">216</span>);</span><br><span class="line">  pdwDataLen = sub_AA3E70(<span class="keyword">this</span> + <span class="number">212</span>);</span><br><span class="line">  dwDataLen = <span class="number">0</span>;</span><br><span class="line">  v11 = <span class="number">0</span>;</span><br><span class="line">  v12 = <span class="number">0</span>;</span><br><span class="line">  v1 = (<span class="keyword">const</span> <span class="keyword">void</span> *)sub_AA2590(Size);</span><br><span class="line">  memmove(key, v1, Size);</span><br><span class="line">  v2 = (<span class="keyword">const</span> <span class="keyword">void</span> *)sub_AA2590(pdwDataLen);</span><br><span class="line">  memmove(flag, v2, pdwDataLen);</span><br><span class="line">  <span class="keyword">if</span> ( Size != <span class="number">8</span> &amp;&amp; pdwDataLen != <span class="number">32</span> )</span><br><span class="line">    <span class="keyword">return</span> wrong((CWnd *)<span class="keyword">this</span>);</span><br><span class="line">  sub_AA3510(key, Size &gt;&gt; <span class="number">1</span>, <span class="number">0x8003</span>u, (<span class="keyword">int</span>)&amp;Buf1, (<span class="keyword">int</span>)&amp;dwDataLen);</span><br><span class="line">  sub_AA3510(&amp;key[<span class="number">4</span>], Size &gt;&gt; <span class="number">1</span>, <span class="number">0x8004</span>u, (<span class="keyword">int</span>)&amp;v8, (<span class="keyword">int</span>)&amp;v11);</span><br><span class="line">  sub_AA3510(key, Size, <span class="number">0x8003</span>u, (<span class="keyword">int</span>)&amp;v9, (<span class="keyword">int</span>)&amp;v12);</span><br><span class="line">  <span class="built_in">memcmp</span>(Buf1, (<span class="keyword">const</span> <span class="keyword">void</span> *)(<span class="keyword">this</span> + <span class="number">220</span>), dwDataLen);</span><br><span class="line">  <span class="keyword">if</span> ( <span class="built_in">memcmp</span>(v8, (<span class="keyword">const</span> <span class="keyword">void</span> *)(<span class="keyword">this</span> + <span class="number">480</span>), v11) )</span><br><span class="line">    <span class="keyword">return</span> wrong((CWnd *)<span class="keyword">this</span>);</span><br><span class="line">  sub_AA36E0(v9, v12, flag, &amp;pdwDataLen, <span class="number">0x104</span>u);</span><br><span class="line">  <span class="keyword">if</span> ( !<span class="built_in">memcmp</span>(flag, (<span class="keyword">const</span> <span class="keyword">void</span> *)(<span class="keyword">this</span> + <span class="number">740</span>), pdwDataLen) )</span><br><span class="line">    result = sucess((CWnd *)<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    result = wrong((CWnd *)<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大概流程就是，对输入的key分四位分别加密，然后进行判断，再用整个加密后的key加密flag,最后进行比较。</p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>然后就是分析一下sub_AA3510和sub_AA36E0两个函数了，里面用的都是API，查了一下是wincrypt.h的函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sub_AA3510(key, Size &gt;&gt; <span class="number">1</span>, <span class="number">0x8003</span>u, (<span class="keyword">int</span>)&amp;Buf1, (<span class="keyword">int</span>)&amp;dwDataLen);</span><br><span class="line">  sub_AA3510(&amp;key[<span class="number">4</span>], Size &gt;&gt; <span class="number">1</span>, <span class="number">0x8004</span>u, (<span class="keyword">int</span>)&amp;v8, (<span class="keyword">int</span>)&amp;v11);</span><br><span class="line">  sub_AA3510(key, Size, <span class="number">0x8003</span>u, (<span class="keyword">int</span>)&amp;v9, (<span class="keyword">int</span>)&amp;v12);</span><br></pre></td></tr></table></figure>
+
+<p>0x8003u是md5，0x8004u是sha1</p>
+<p>对key的前四位md5加密生成buf1,后四位sha1生成V8</p>
+<p>再对整个key进行md5生成v9</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub_AA36E0(v9, v12, flag, &amp;pdwDataLen, <span class="number">0x104</span>u);</span><br></pre></td></tr></table></figure>
+
+<p>这个函数大概是个AES，只要有v9的值和之后比较的密钥，就能解出flag</p>
+<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p>然后就是找到密钥了，但是密钥是动态的，ida一直断不在里面，怀疑有反调试，但是跟了跟也没跟出来</p>
+<p>直接od跑，strongod直接断在里面了，找到密钥解完AES，flag就出了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/04/24/das%E5%9B%9B%E6%9C%88/" data-id="cl2d6rjc30000lcvb0spc4lgx" data-title="das四月" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%94%E8%B5%9Bwp/" rel="tag">比赛wp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-IAT-HOOK" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/12/06/IAT-HOOK/" class="article-date">
+  <time class="dt-published" datetime="2021-12-06T14:12:15.000Z" itemprop="datePublished">2021-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/12/06/IAT-HOOK/">IAT_HOOK</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>修改IAT表中导入函数的地址，实现在调用函数时执行自己的代码</p>
+<h1 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h1><p>1.获取目标函数的地址，获取待Hook模块输入表的起始地址</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/06/IAT-HOOK/" data-id="cl2d5wr8q0000a4vb3i9barwo" data-title="IAT_HOOK" class="article-share-link">分享</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RE/" rel="tag">RE</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-柏鹭杯" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/10/30/%E6%9F%8F%E9%B9%AD%E6%9D%AF/" class="article-date">
@@ -505,121 +606,6 @@
 
 
   
-    <article id="post-编码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/11/%E7%BC%96%E7%A0%81/" class="article-date">
-  <time class="dt-published" datetime="2021-10-11T13:21:49.000Z" itemprop="datePublished">2021-10-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/11/%E7%BC%96%E7%A0%81/">编码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="社会主义核心价值观编码"><a href="#社会主义核心价值观编码" class="headerlink" title="社会主义核心价值观编码"></a>社会主义核心价值观编码</h1><p>形如社会主义核心价值观</p>
-<p>没有什么意义</p>
-<h1 id="与佛论禅编码"><a href="#与佛论禅编码" class="headerlink" title="与佛论禅编码"></a>与佛论禅编码</h1><p>形如佛语</p>
-<p>没有什么意义</p>
-<h1 id="摩斯密码"><a href="#摩斯密码" class="headerlink" title="摩斯密码"></a>摩斯密码</h1><p>有明显的点与杠特征的</p>
-<p><img src="https://i.loli.net/2021/10/12/AxEcYNH9Wg1oFvZ.png" alt="附件5.png"></p>
-<p>形如这样子的</p>
-<p>直接用工具翻译</p>
-<h1 id="盲文"><a href="#盲文" class="headerlink" title="盲文"></a>盲文</h1><p>有英语盲文和汉语拼音两种，一种解不出来可以试试另一种</p>
-<p>丢个解密网址：</p>
-<p><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=mangwen">https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=mangwen</a></p>
-<h1 id="ebcdic"><a href="#ebcdic" class="headerlink" title="ebcdic"></a>ebcdic</h1><p>跟ascii差不多，如果有乱码可以试试</p>
-<p>用01editor可以直接编码</p>
-<p><img src="https://i.loli.net/2021/10/12/yU32VJuG5Qj17Ls.png" alt="1.png"></p>
-<h1 id="旗语"><a href="#旗语" class="headerlink" title="旗语"></a>旗语</h1><p>直接上图，清晰可见</p>
-<p><img src="https://i.loli.net/2021/10/12/sXu6gGjMOfmWtcI.png" alt="20201031092252316.png"></p>
-<h1 id="音符编码"><a href="#音符编码" class="headerlink" title="音符编码"></a>音符编码</h1><p>♭♯♪‖¶♬♭♭♪♭‖‖♭♭♬‖♫♪‖♩♬‖♬♬♭♭♫‖♩♫‖♬♪♭♭♭‖¶∮‖‖‖‖♩♬‖♬♪‖♩♫♭♭♭♭♭§‖♩♩♭♭♫♭♭♭‖♬♭‖¶§♭♭♯‖♫∮‖♬¶‖¶∮‖♬♫‖♫♬‖♫♫§=</p>
-<p>类似以上，等号结尾</p>
-<p><a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=yinyue">https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=yinyue</a></p>
-<h1 id="Ook编码"><a href="#Ook编码" class="headerlink" title="Ook编码"></a>Ook编码</h1><p><a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">https://www.splitbrain.org/services/ook</a></p>
-<h1 id="敲击码"><a href="#敲击码" class="headerlink" title="敲击码"></a>敲击码</h1><p><img src="https://i.loli.net/2021/10/13/hAd7OM6yfJaeKCX.png" alt="qiao.png"></p>
-<p>形式是两段点作为坐标，/符号分隔</p>
-<h1 id="aaencode"><a href="#aaencode" class="headerlink" title="aaencode"></a>aaencode</h1><p>用于混淆js代码</p>
-<p><img src="https://i.loli.net/2021/10/18/TCwnco7gy86D3rI.png" alt="QQ截图20211018170422.png"></p>
-<p>这个样子</p>
-<p><a target="_blank" rel="noopener" href="http://www.atoolbox.net/Tool.php?Id=703">http://www.atoolbox.net/Tool.php?Id=703</a></p>
-<h1 id="中文的编码"><a href="#中文的编码" class="headerlink" title="中文的编码"></a>中文的编码</h1><h2 id="中文电码"><a href="#中文电码" class="headerlink" title="中文电码"></a>中文电码</h2><p><a target="_blank" rel="noopener" href="https://gjy.bift.edu.cn/tzgg/22776.htm%E5%AF%B9%E7%85%A7%E8%A1%A8">https://gjy.bift.edu.cn/tzgg/22776.htm对照表</a></p>
-<p><a target="_blank" rel="noopener" href="https://apps.chasedream.com/chinese-commercial-code/%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%99">https://apps.chasedream.com/chinese-commercial-code/查询网站</a></p>
-<h2 id="五笔编码"><a href="#五笔编码" class="headerlink" title="五笔编码"></a>五笔编码</h2><p><a target="_blank" rel="noopener" href="http://www.zd9999.com/wb/search.asp%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%99">http://www.zd9999.com/wb/search.asp查询网站</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/11/%E7%BC%96%E7%A0%81/" data-id="ckuvbmnln000ajgvb438khdcj" data-title="编码" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/" rel="tag">misc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-文件头" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/" class="article-date">
-  <time class="dt-published" datetime="2021-10-11T13:08:33.000Z" itemprop="datePublished">2021-10-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/">文件头</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="1-gif"><a href="#1-gif" class="headerlink" title="1.gif"></a>1.gif</h1><p>gif的文件头是 47 49 46 38 </p>
-<p>直接编辑就行</p>
-<h1 id="2-Rar"><a href="#2-Rar" class="headerlink" title="2.Rar"></a>2.Rar</h1><p>文件头：526172211A0700</p>
-<p>文件尾：C43D7B00400700</p>
-<p><img src="https://i.loli.net/2021/10/22/G2aw8KV6cfWFzi9.png" alt="2019080922505529.png"></p>
-<p>不止会考文件头，都要注意</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/10/11/%E6%96%87%E4%BB%B6%E5%A4%B4/" data-id="ckuvbmnlj0006jgvb6nmp3ghb" data-title="文件头" class="article-share-link">分享</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/misc/" rel="tag">misc</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -648,7 +634,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/RE/" style="font-size: 15px;">RE</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/misc/" style="font-size: 20px;">misc</a> <a href="/tags/%E6%AF%94%E8%B5%9Bwp/" style="font-size: 10px;">比赛wp</a>
+      <a href="/tags/RE/" style="font-size: 16.67px;">RE</a> <a href="/tags/crypto/" style="font-size: 10px;">crypto</a> <a href="/tags/misc/" style="font-size: 20px;">misc</a> <a href="/tags/%E6%AF%94%E8%B5%9Bwp/" style="font-size: 13.33px;">比赛wp</a>
     </div>
   </div>
 
@@ -657,7 +643,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li></ul>
     </div>
   </div>
 
@@ -670,6 +656,14 @@
       <ul>
         
           <li>
+            <a href="/2022/04/24/das%E5%9B%9B%E6%9C%88/">das四月</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/06/IAT-HOOK/">IAT_HOOK</a>
+          </li>
+        
+          <li>
             <a href="/2021/10/30/%E6%9F%8F%E9%B9%AD%E6%9D%AF/">柏鹭杯</a>
           </li>
         
@@ -679,14 +673,6 @@
         
           <li>
             <a href="/2021/10/15/%E5%8E%8B%E7%BC%A9%E5%8C%85/">压缩包</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/14/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">加密算法</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/13/vm/">vm</a>
           </li>
         
       </ul>
@@ -702,7 +688,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2021 l0v3m1ng<br>
+      &copy; 2022 l0v3m1ng<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
