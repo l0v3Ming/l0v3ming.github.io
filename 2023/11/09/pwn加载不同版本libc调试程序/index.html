@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en" theme-mode="dark"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pwn加载不同版本libc调试程序 | l0v3m1ng`s blog</title><script>var config = {"root":"/","search":{"preload":false,"activeHolder":"键入以继续","blurHolder":"数据检索","noResult":"无 $0 相关数据"},"code":{"codeInfo":"$0 - 共 $1 行","copy":"复制","copyFinish":"复制成功","expand":"展开"}}</script><script src="//unpkg.com/mermaid@9.2.2/dist/mermaid.min.js"></script><link rel="stylesheet" href="/css/arknights.css"><script>if (window.localStorage.getItem('theme-mode') === 'light') document.documentElement.setAttribute('theme-mode', 'light')
+if (window.localStorage.getItem('theme-mode') === 'dark') document.documentElement.setAttribute('theme-mode', 'dark')</script><style>@font-face {
+ font-family: BenderLight;
+ src: local('Bender'), url("/font/BenderLight.ttf");
+}
+@font-face {
+ font-family: 'JetBrains Mono';
+ src: local('JetBrains Mono'), url('/font/JetBrainsMono-Regular.woff2') format('woff2');
+}</style><meta name="generator" content="Hexo 6.3.0"></head><body><div class="loading" style="opacity: 0"><div class="loadingBar left"></div><div class="loadingBar right"></div></div><main><header class="closed"><nav><div class="navBtn hide"><i class="navBtnIcon"><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span><span class="navBtnIconBar"></span></i></div><div class="navItem" id="search-header"><span class="navItemTitle"><input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="数据检索" spellcheck="false" maxlength="50" type="text" id="search-input"></span></div><div class="navItem" id="search-holder"></div><div class="search-popup"><div id="search-result"></div></div><ol class="navContent"><li class="navItem"><a class="navBlock" href="/"><span class="navItemTitle">Home</span></a></li><li class="navItem" matchdata="categories,tags"><a class="navBlock" href="/archives/"><span class="navItemTitle">Archives</span></a></li></ol></nav></header><article><div id="post-bg"><div id="post-title"><h1>pwn加载不同版本libc调试程序</h1><div id="post-info"><span>文章发布时间: <div class="control"><time datetime="2023-11-09T06:40:16.000Z" id="date"> 2023-11-09</time></div></span><br><span>最后更新时间: <div class="control"><time datetime="2023-11-10T06:56:52.665Z" id="updated"> 2023-11-10</time></div></span></div></div><hr><div id="post-content"><h1 id="获取所有版本的libc和ld文件"><a href="#获取所有版本的libc和ld文件" class="headerlink" title="获取所有版本的libc和ld文件"></a>获取所有版本的libc和ld文件</h1><p>github网站：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">https://github.com/matrix1001/glibc-all-in-one<br></code></pre></td></tr></table></figure>
+
+<p>将项目打包下载，在目标文件夹内先执行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">python3 ./update_list<br></code></pre></td></tr></table></figure>
+
+<p>会生成list文件，里面包含了可以下载的libc版本。</p>
+<p>我在尝试运行一道pwn题，要用到2.34版本的libc，但是运行发现2.34的源现在没了，不过是道栈溢出，更高版本一个也行。</p>
+<p>报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">tar (child): zstd：无法 exec: 没有那个文件或目录<br></code></pre></td></tr></table></figure>
+
+<p>疑似是因为没有zstd</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">sudo apt install zstd<br></code></pre></td></tr></table></figure>
+
+<p>成功了，进入下一步。</p>
+<h1 id="patchelf"><a href="#patchelf" class="headerlink" title="patchelf"></a>patchelf</h1><p>运用patchelf工具，可以修改程序绑定的libc和ld文件。</p>
+<p>关于patchelf的安装，可以直接在github上下载，用make工具安装，相关环境如果没有安装可以百度一下安装教程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">https://github.com/NixOS/patchelf/releases/tag/0.12<br></code></pre></td></tr></table></figure>
+
+<p>接下来以我的题目为例，题目名为chal</p>
+<p>首先用ldd指令查看当前用到的libc和ld：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ ldd ./chal<br>./chal: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34&#x27; not found (required by ./chal)<br>	linux-vdso.so.1 (0x00007ffd15def000)<br>	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007fe684267000)<br>	/lib64/ld-linux-x86-64.so.2 (0x00007fe684470000)<br></code></pre></td></tr></table></figure>
+
+<p>可以看到libc版本不匹配，需要通过patchelf修改。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">$ patchelf --replace-needed libc.so.6 ./libc.so.6 ./chal<br>$ patchelf --set-interpreter ./ld-linux-x86-64.so.2 ./chal<br></code></pre></td></tr></table></figure>
+
+<p>上面第一条指令用来修改绑定libc，第二条用来修改ld，指令用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs plaintext">patchelf --replace-needed libc.so.6 修改libc的路径 文件路径<br>patchelf --set-interpreter 修改ld的路径 文件路径<br></code></pre></td></tr></table></figure>
+
+<p>执行后可以成功运行chal文件。</p>
+<div id="paginator"></div></div><div id="post-footer"><div id="pages" style="justify-content: flex-end"><div class="footer-link" style="width: 50%;right:1px;border-left:1px #fe2 solid"><a href="/2023/11/08/z3%E5%BA%93%E8%BF%9B%E9%98%B6/">z3库进阶 Prev →</a></div></div></div></div><div class="bottom-btn"><div><a id="to-top" onClick="scrolls.scrolltop();" title="回到顶部" style="opacity: 0; display: none;">∧</a><a id="to-index" href="#toc-div" title="文章目录">≡</a><a id="color-mode" onClick="colorMode.change()" title="切换主题"></a></div></div></article><aside><div id="about"><a href="/" id="logo"><img alt="Logo"></a><h1 id="Dr"><a href="Dr.l0v3m1ng">Dr.l0v3</a></h1><div id="description"><p></p></div></div><div id="aside-block"><div id="toc-div"><h1>目录</h1><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%89%88%E6%9C%AC%E7%9A%84libc%E5%92%8Cld%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">获取所有版本的libc和ld文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#patchelf"><span class="toc-number">2.</span> <span class="toc-text">patchelf</span></a></li></ol></div></div><footer><nobr>构建自 <a target="_blank" rel="noopener" href="http://hexo.io">Hexo</a></nobr><wbr><nobr> 使用主题 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus/hexo-theme-arknights">Arknights</a></nobr><wbr><nobr>主题作者 <a target="_blank" rel="noopener" href="https://github.com/Yue-plus">Yue_plus</a></nobr></footer></aside></main><canvas id="canvas-dust"></canvas><script src="/js/search.js"></script><script class="pjax-js">reset=_=>{code.findCode();}</script><script src="/js/arknights.js"></script><script src="/js/pjax.js"></script><script>window.addEventListener("load",() => {pjax = new Pjax({
+ cacheBust: false,
+ selectors: ['title','article','#aside-block','.pjax-js'],
+ switches: {'article': Pjax.switches.sideBySide},
+ switchesOptions: {
+   'article': {
+     classNames: {
+       remove: "pjax-out",
+       add: "pjax-in"
+     }
+   }
+ }
+});
+document.addEventListener("pjax:complete", reset);reset()})</script></body></html>
